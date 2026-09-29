@@ -24,9 +24,6 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
       - name: Install Dependencies
         run: npm install
 
@@ -35,11 +32,12 @@ jobs:
           npx cap add android
           npx cap sync android
 
-      - name: Build Debug APK
+      - name: Accept Licenses & Build APK
         run: |
           cd android
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
           chmod +x ./gradlew
-          ./gradlew assembleDebug
+          ./gradlew assembleDebug --stacktrace
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
