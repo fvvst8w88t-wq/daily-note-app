@@ -1,0 +1,6 @@
+{
+  "appId": "com.dailynote.app",
+  "appName": "Daily Notes",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
